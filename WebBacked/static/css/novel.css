@@ -1,0 +1,59 @@
+/* novel */
+
+body {
+    background-color: #d5d1d1; /* 设置背景色为淡灰色 */
+}
+
+
+.random-novels {
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+    gap: 10px;
+    margin: 5% 15%;
+    
+}
+
+.novel-item {
+    flex: 0 0 calc(20% - 20px);
+    box-sizing: border-box;
+    padding: 1px;
+    max-height: 250px; /* 设置最大高度，根据需要进行调整 */
+    color: #090606; /* 设置字体颜色为奶白色 */
+    font-weight: 200;
+}
+
+.novel-content {
+    display: flex;
+    align-items: center;
+}
+
+.novel-image {
+    flex: 0 0 30%;
+    margin-right: 20px;
+    
+}
+
+.novel-image img {
+    max-width: 70%;
+    height: auto;
+}
+
+
+.novel-info p {
+    margin: 0;
+    display: inline;
+    margin-right: 20px;
+
+}
+
+.novel-description {
+    margin-top: 10px; /* 调整描述部分与上方信息的间距 */
+}
+
+
+.pagination{
+    text-align: center;
+    margin-bottom: 5%;
+    text-decoration: none;
+}

@@ -1,0 +1,284 @@
+/* style.css */
+
+
+
+/* lable */
+
+.lable {
+    display: flex;
+    flex-direction: column;
+    margin-top: 80px;
+}
+
+.lable2 {
+    font-size: 15px;
+    color: #999;
+}
+
+.lable3 {
+    font-size: 28px;
+    font-weight: bold;
+    color: rgb(239, 235, 235);
+    margin-top: 10px;
+}
+
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color:#101017; /* 奶白色背景 */
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ca */
+
+.content {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.categories{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.category-columns {
+    margin-top: 30px;
+    display: flex;
+    color: rgb(247, 244, 244);
+}
+
+.left-column{
+    float: left;
+}
+.right-column {
+    margin-left: 200px;
+    float: left;
+}
+
+.left-column ol,
+.right-column ol {
+    list-style-type: none; /* 去掉默认序号 */
+    padding: 0;
+}
+
+
+.left-column li,
+.right-column li {
+
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: rgb(209, 203, 203); /* 字体颜色 */
+    margin: 10px 10px; /* 调整上下间距 */
+}
+
+.left-column_2{
+    margin-top: 20px;
+    width: 40%;
+    float: left;
+    height: 200px;
+    background-color: rgb(122, 102, 102);
+    color: white; /* 设置文字颜色为白色，以便与红色背景对比 */
+    padding: 5px 10px; /* 添加内边距，使红色背景更显眼 */
+    border-radius: 3px; /* 添加圆角 */
+
+}
+.right-column_2{
+    width: 40%;
+    margin-left: 10%;
+    float: left;
+    margin-top: 20px;
+    height: 200px;
+    background-color: rgb(154, 149, 149);
+    color: white; /* 设置文字颜色为白色，以便与红色背景对比 */
+    padding: 5px 10px; /* 添加内边距，使红色背景更显眼 */
+    border-radius: 3px; /* 添加圆角 */
+}
+
+.category-column a{
+    text-decoration: none;
+    color: rgb(241, 235, 235);
+    /* font-weight: bold; */
+}
+
+
+/* nav */
+
+.main-content {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+    position: relative; /* 添加相对定位，使 .navbar 相对于 .main-content 定位 */
+}
+
+.navbar {
+    position: relative;
+    width: 100%;
+    background-color: rgba(24, 14, 14, 0.5);
+    height: 40px;
+}
+
+.navbar ul {
+    list-style: none;
+    margin-left: 75%;
+    display: flex;
+    align-items: center;
+    position:absolute;
+    margin-top: 10px;
+}
+
+.navbar li {
+    margin-right: 30px;
+   
+}
+
+.navbar a {
+    text-decoration: none;
+    color: rgb(186, 181, 181);
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+/* image */
+
+
+.random-images {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3列布局 */
+    gap: 10px 15px; /* 图片之间的间隔，第一个值是上下间隔，第二个值是左右间隔 */
+}
+
+.image-item {
+    width: 100%; /* 图片宽度 */
+    height: 0;
+    padding-bottom: 68%; /* 图片高度为宽度的75%，用于保持宽高比例 */
+    position: relative;
+    overflow: hidden;
+}
+
+.image-item img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+
+.image-item:hover .image-title {
+    transform: translateY(0); /* 鼠标悬停时标题上划显示 */
+}
+
+.image-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px;
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    transform: translateY(100%); /* 初始状态下标题向下隐藏 */
+    transition: transform 0.4s; /* 添加上划动画过渡效果 */
+}
+
+
+
+
+
+/* novel */
+.random-novels {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 5%;
+}
+
+.novel-item {
+    flex: 0 0 calc(20% - 20px);
+    box-sizing: border-box;
+    padding: 1px;
+    max-height: 230px; /* 设置最大高度，根据需要进行调整 */
+    color: #f4f4f4; /* 设置字体颜色为奶白色 */
+    font-weight: 200;
+}
+
+.novel-content {
+    display: flex;
+    align-items: center;
+}
+
+.novel-image {
+    flex: 0 0 30%;
+    margin-right: 20px;
+    
+}
+
+.novel-image img {
+    max-width: 70%;
+    height: auto;
+}
+
+
+.novel-info p {
+    margin: 0;
+    display: inline;
+    margin-right: 20px;
+
+}
+
+.novel-description {
+    margin-top: 10px; /* 调整描述部分与上方信息的间距 */
+}
+
+
+
+
+
+
+
+/* footer */
+footer {
+    margin-top: 100px;
+    color: #f8f9fa; /* 设置字体颜色 */
+    padding: 20px 0; /* 设置底部内容的内边距 */
+}
+
+.footer-content {
+    max-width: 1200px; /* 设置最大宽度 */
+    margin: 0 auto; /* 水平居中 */
+    text-align: center; /* 文本居中 */
+}
+
+.footer-links {
+    list-style: none; /* 去除列表样式 */
+    margin-top: 10px; /* 设置链接上方的间距 */
+}
+
+.footer-links li {
+    display: inline-block; /* 水平排列链接 */
+    margin: 0 10px; /* 设置链接之间的间距 */
+}
+
+.footer-links a {
+    color: #f8f9fa; /* 设置链接颜色 */
+    text-decoration: none; /* 去除下划线 */
+}
+
+.footer-links a:hover {
+    text-decoration: underline; /* 鼠标悬停时添加下划线 */
+}

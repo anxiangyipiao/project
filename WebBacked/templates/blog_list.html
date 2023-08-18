@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'css/novel.css' %}">
+    <title>博客</title>
+</head>
+<body>
+
+<div class="novel-list">
+   <div style="margin-top: 40px;margin-left: 45%; font-size: 40px;">全部文章</div>
+    <div class="random-novels">
+        {% for novel in page_obj %}
+        <div class="novel-item">
+            <div class="novel-content">
+                <div class="novel-image">
+                    <img src="{{ novel.url }}" alt="">
+                </div>
+                <div class="novel-info">
+                    <h3><a href="{% url 'blog_detail' blog_id=novel.id %}">{{ novel.title }}</a></h3>
+                    <p><span>分类：</span>{{ novel.category }}</p>
+                    <p><span>作者：</span>{{ novel.commentsCount }}</p>
+                    <p><span>大小：</span>{{ novel.viewsCount }}</p>
+                    <p><span>时间：</span>{{ novel.crawl_time|date:"b. d, Y" }}</p>
+                    <div class="novel-description"> <span>描述：</span> {{ novel.des|truncatechars:160 }}</div>      
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+   
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; 第一页</a>
+            <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        <span class="current-page">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">最后 &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+</body>
+</html>

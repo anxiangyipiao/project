@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>图片列表</title>
+    <link rel="stylesheet" href="{% static 'css/img.css' %}">
+</head>
+<body>
+
+<div class="image-list">
+    <div style="margin-top: 40px;margin-left: 45%; font-size: 40px;">{{ category }}</div>
+    <div class="random-images">
+        {% for image in page_obj %}
+        <div class="image-item">
+            <img src="data:image/jpeg;base64,{{ image.source }}" alt="{{ image.title }}">
+            <div class="image-title">{{ image.title }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1{% if category %}&category={{ category }}{% endif %}">&laquo; 第一页</a>
+            <a href="?page={{ page_obj.previous_page_number }}{% if category %}&category={{ category }}{% endif %}">上一页</a>
+        {% endif %}
+
+        <span class="current-page">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{% if category %}&category={{ category }}{% endif %}">下一页</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}{% if category %}&category={{ category }}{% endif %}">最后 &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+</body>
+</html>

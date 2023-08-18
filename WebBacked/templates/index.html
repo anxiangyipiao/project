@@ -1,0 +1,208 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Awesome Index Page</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+
+    <div class="container">
+        <div class="main-content" style="background-image: url('data:image/jpeg;base64,{{ random_image.source }}');">
+   
+        <!-- 左上边的导航栏 -->
+            <div class="navbar">
+                <ul>
+                    <li><a href="{% url 'novel_list' %}" target="_blank">小说</a></li>   
+                    <li><a href="{% url 'image_list' %}" target="_blank" >图片</a></li>
+                    <li><a href="{% url 'blog_list' %}"  target="_blank">博客</a></li>
+                    
+                        {% if request.session.is_login %}
+                            <li><a href="{% url 'login' %}">{{ request.session.user_name }}</a></li>
+                            <li><a href="{% url 'logout' %}">登出</a></li>
+                        {% else %}
+                            <li><a href="{% url 'login' %}">登录</a></li>
+                            <li><a href="{% url 'register' %}">注册</a></li>
+                        {% endif %}
+                                  
+            </div>
+        </div>
+
+
+        <div class="content">
+            <div class="categories">
+                <div class="lable"> 
+                    <div class="lable2">
+                        Choice
+                    </div>
+                    <div class="lable3">
+                        Categories 
+                    </div>     
+                </div>
+                <div class="category-column" style="display: block;" id="image">
+                    <div class="left-column">       
+                        <ol id="categoryListLeft">
+                                <li><a href="{% url 'search_by_category_image' %}?category=4K动漫" target="_blank">4K动漫</a></li>
+                                <li><a href="{% url 'search_by_category_image' %}?category=4K影视" target="_blank">4K影视</a></li>
+                                <li><a href="{% url 'search_by_category_image' %}?category=4K美女" target="_blank">4K美女</a></li>
+                                <li><a href="{% url 'search_by_category_image' %}?category=4K原创" target="_blank">4K原创</a></li>
+                                <li><a href="{% url 'search_by_category_image' %}?category=4K手机壁纸" target="_blank">4K手机壁纸</a></li>                      
+                        </ol>
+                    </div>
+                    <div class="right-column">
+                        <ol id="categoryListRight">
+                                <li><a href="{% url 'search_by_category_image' %}?category=4K风景" target="_blank">4K风景</a></li>
+                                <li><a href="{% url 'search_by_category_image' %}?category=4K汽车" target="_blank">4K汽车</a></li>
+                                <li><a href="{% url 'search_by_category_image' %}?category=4K宗教" target="_blank">4K宗教</a></li>
+                                <li><a href="{% url 'search_by_category_image' %}?category=4K背景" target="_blank">4K背景</a></li> 
+                                <li><a href="{% url 'search_by_category_image' %}?category=4K动物" target="_blank">4K动物</a></li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="category-column"  style="display: none;" id="novel">
+                    <div class="left-column">       
+                        <ol id="categoryListLeft">                      
+                                <li><a href="{% url 'search_by_category_novel' %}?category=武侠修真" target="_blank">武侠修真</a></li>
+                                <li><a href="{% url 'search_by_category_novel' %}?category=女生言情" target="_blank">女生言情</a></li>
+                                <li><a href="{% url 'search_by_category_novel' %}?category=武侠修真" target="_blank">耽美同人</a></li>
+                                <li><a href="{% url 'search_by_category_novel' %}?category=女生言情" target="_blank">网游竞技</a></li>
+                        </ol>
+                    </div>
+                    <div class="right-column">
+                        <ol id="categoryListRight">                             
+                                <li><a href="{% url 'search_by_category_novel' %}?category=历史军事" target="_blank">历史军事</a></li>
+                                <li><a href="{% url 'search_by_category_novel' %}?category=科幻灵异" target="_blank">科幻灵异</a></li>
+                                <li><a href="{% url 'search_by_category_novel' %}?category=玄幻奇幻" target="_blank">玄幻奇幻</a></li>
+                                <li><a href="{% url 'search_by_category_novel' %}?category=都市小说" target="_blank">都市小说</a></li>
+                             
+                        </ol>
+                    </div>
+                </div>
+
+                <li><button id="toggleCategory" style="margin-left: 25%; border: none; background-color: #161b20; color: #fff; padding: 5px 10px; border-radius: 5px; font-size: 15px; cursor: pointer;">咻</button></li>
+
+
+            </div>
+
+            <div class="categories">
+                <div class="lable"> 
+                    <div class="lable2">
+                        On Focus
+                    </div>
+                    <div class="lable3">
+                        Collections
+                    </div>     
+                </div>
+                <div class="category-column">
+
+                    <div class="left-column_2">
+                        hots
+                    </div>
+                    <div class="right-column_2">
+                        comments
+                    </div>
+
+
+                    <!-- <ul> -->
+                        <!-- <li><button id="toggleButton">Toggle</button></li> -->
+                        <!-- 其他分类 ... -->
+                    <!-- </ul> -->
+
+                </div>
+            </div>
+        
+           
+        </div>
+
+        <div style="margin-left: 13%; margin-right: 13%; margin-top: 5%;">
+            <!-- 随机返回的图片 -->
+            <div class="lable"> 
+                <div class="lable2">
+                    Fresh
+                </div>
+                <div class="lable3">
+                    Recent Image Update 
+                </div>     
+            </div>
+            <div class="random-images">
+                {% for image in random_images %}
+                <div class="image-item">
+                    <img src="data:image/jpeg;base64,{{ image.source }}" alt="{{ image.title }}">
+                    <div class="image-title">{{ image.title }}</div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="lable"> 
+                <div class="lable2">
+                    Fresh
+                </div>
+                <div class="lable3">
+                    Recent Novel Update 
+                </div>     
+            </div>
+            <!-- 随机返回的小说 -->
+            <div class="random-novels">
+                {% for novel in random_novels %}
+                <div class="novel-item">
+                    <div class="novel-content">
+                        <div class="novel-image">
+                            <img src="{{ novel.url }}" alt="{{ novel.title }}">
+                        </div>
+                        <div class="novel-info">
+                            <h3>{{ novel.title }}</h3>
+                            <p><span>作者：</span>{{ novel.author }}</p>
+                            <p><span>分类：</span>{{ novel.category }}</p>
+                            <p><span>大小：</span>{{ novel.size }}</p>
+                            <p><span>时间：</span>{{ novel.crawl_time|date:"b. d, Y" }}</p>
+                            <div class="novel-description"> <span>描述：</span> {{ novel.des|truncatechars:160 }}</div>
+
+                            <!-- 这里添加其他需要展示的字段 -->
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+       
+        
+        <footer>
+            <div class="footer-content">
+                <p>&copy; Anxiang All rights reserved</p>
+                <ul class="footer-links">
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Advertise</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Policy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Abuse</a></li>
+                </ul>
+            </div>
+        </footer>
+
+
+    </div>
+
+
+
+
+    <script>
+    
+
+    const toggleButton = document.getElementById('toggleCategory');
+    const imageCategory = document.getElementById('image');
+    const novelCategory = document.getElementById('novel');
+
+    toggleButton.addEventListener('click', () => {
+        if (imageCategory.style.display === 'none') {
+            imageCategory.style.display = 'block';
+            novelCategory.style.display = 'none';
+        } else {
+            imageCategory.style.display = 'none';
+            novelCategory.style.display = 'block';
+        }
+    });
+    </script>
+</body>
+</html>

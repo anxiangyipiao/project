@@ -1,0 +1,58 @@
+/* login.css */
+
+/* 样式整个登录表单容器 */
+.container {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    background-color: #f4f4f4;
+}
+
+/* 设置表单的背景色、边框和内边距 */
+.form-login {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 设置表单标题的样式 */
+.form-login h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* 设置表单输入框的样式 */
+.form-login input[type="text"],
+.form-login input[type="password"] {
+    width: 30%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* 设置重置和提交按钮的样式 */
+.form-login button[type="reset"],
+.form-login button[type="submit"] {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* 设置警告信息的样式 */
+.alert {
+    background-color: #f2dede;
+    color: #a94442;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ebccd1;
+    border-radius: 5px;
+}
+

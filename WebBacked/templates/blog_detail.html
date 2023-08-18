@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/editormd.min.css' %}"/>
+    <title>博客文章</title>
+</head>
+<body>
+
+{% load mymarkdown %}
+
+<div class="blog-content">
+    {{ blog.content|md|safe }}
+</div>
+
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/editormd.min.js' %}"></script>
+</body>
+</html>
