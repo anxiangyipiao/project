@@ -1,7 +1,7 @@
 from functools import wraps
 from django.shortcuts import redirect
 from .models import User,Role,UserRole,RolePermission,Permission
-
+from django.core.cache import cache
 
 
 def role_required(role_name):
@@ -56,5 +56,21 @@ def login_required():
                 except (User.DoesNotExist, Role.DoesNotExist):
                     pass
             return redirect('login')  # 重定向到登录页面
+        return _wrapped_view
+    return decorator
+
+
+def cache_view(timeout):
+    def decorator(view_func):
+        @wraps(view_func)
+        def _wrapped_view(request, *args, **kwargs):
+            cache_key = f"{view_func.__name__}:{request.user.id}"
+            cached_data = cache.get(cache_key)
+            if cached_data is None:
+                result = view_func(request, *args, **kwargs)
+                cache.set(cache_key, result, timeout=timeout)
+            else:
+                result = cached_data
+            return result
         return _wrapped_view
     return decorator

@@ -8,17 +8,17 @@ from .form import UserLoginForm,UserRegistrationForm
 from .models import User
 import hashlib 
 from random import sample
-from .decorators import role_required, permission_required,login_required
+from .decorators import role_required, permission_required,login_required,cache_view
 #
 from django.core.cache import cache
-from django.views.decorators.cache import cache_page
+# from django.views.decorators.cache import cache_page
 
 #task
 from .tasks import add
 
 def test_celery(request):
-     result = add.delay(3, 5)
-     return HttpResponse(result.task_id + ' : ' + result.status)
+    add.delay(3, 5)
+    return HttpResponse("s")
 
 
 # 
@@ -27,12 +27,30 @@ def test_celery(request):
 
 
 # index 页
-@cache_page(60 * 1)  # 缓存 15 分钟
+@cache_view(timeout=60)
 def index(request):
 
     random_images,random_novels = random_12_img_novel()
     random_image = get_random_image()
     return render(request, 'index.html', locals())
+ 
+
+    # 尝试从缓存中获取数据
+    # cached_data = cache.get("index_data")
+    # if cached_data is None:
+    #     # 如果缓存中没有数据，则从数据库获取数据并缓存
+    #     random_images, random_novels = random_12_img_novel()
+    #     random_image = get_random_image()
+
+    #     # 将获取到的数据保存到缓存中，设置有效期为 1 小时
+    #     cached_data = (random_images, random_novels, random_image)
+    #     cache.set("index_data", cached_data, timeout=3600)
+    # else:
+    #     random_images, random_novels, random_image = cached_data
+
+    # return render(request, 'index.html', locals())
+
+
 
 def random_12_img_novel():
     all_images = ImageTable.objects.all()
@@ -73,6 +91,9 @@ def novel_list(request):
     page_number = request.GET.get('page')  # 获取当前页数，默认为第一页
 
     page_obj = paginator.get_page(page_number)  # 获取当前页的记录
+    # 将分页信息一并缓存
+    cache_key = f"novel_list:{page_number}"
+    cache.set(cache_key, page_obj)
 
     return render(request, 'novel_list.html', {'page_obj': page_obj})
 
@@ -185,6 +206,7 @@ def hash_code(s, salt='anxiangyipiao'):
     h.update(s.encode())  # update方法只接收bytes类型
     return h.hexdigest()
 
+
 def user_login(request):
 
     if request.session.get('is_login',None):
@@ -210,6 +232,10 @@ def user_login(request):
                     if next_url:
                          return redirect(next_url)
                     
+                    # 登录成功后清除缓存
+                    cache_key = f"index:{request.user.id}"
+                    cache.delete(cache_key)
+
                     return redirect('index')
                                 
                 else:
@@ -221,17 +247,25 @@ def user_login(request):
     login_form = UserLoginForm()
     return render(request, 'login.html', locals())  
 
+
 def logout(request):
     if not request.session.get('is_login', None):
         # 如果本来就未登录，也就没有登出一说
         return redirect('index')
+    
+    # 删除缓存键，根据需要修改缓存键的构建方式
+    cache_key = f"index:{request.user.id}"
+    cache.delete(cache_key)
+
     request.session.flush()
+
     # flush()方法是比较安全的一种做法，而且一次性将session中的所有内容全部清空，确保不留后患
     # 或者使用下面的方法
     # del request.session['is_login']
     # del request.session['user_id']
     # del request.session['user_name']
     return redirect('index')
+
 
 def register(request):
     if request.session.get('is_login', None):

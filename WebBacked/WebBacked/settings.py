@@ -35,16 +35,16 @@ CELERY_TIMEZONE = 'Asia/Shanghai'
 # 设置任务的默认队列（可选）
 CELERY_DEFAULT_QUEUE = 'default'
 
-# 配置后台结果存储，例如使用 Redis
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'
+# # 配置后台结果存储，例如使用 Redis
+# CELERY_RESULT_BACKEND = 'redis://localhost:6379/2'
 
-CELERY_RESULT_BACKEND = "django-db"
- # celery内容等消息的格式设置，默认json
-CELERY_ACCEPT_CONTENT = ['application/json', ]
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
+# CELERY_RESULT_BACKEND = "django-db"
+#  # celery内容等消息的格式设置，默认json
+# CELERY_ACCEPT_CONTENT = ['application/json', ]
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
 
-CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+# CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 # Application definition
 
 INSTALLED_APPS = [
@@ -57,10 +57,9 @@ INSTALLED_APPS = [
     'app',
     'captcha',
     'mdeditor',
-    'django-celery-results',
-    'django-celery-beat',
+    # 'django-celery-results',
+    # 'django-celery-beat',
 ]
-
 
 
 MIDDLEWARE = [
@@ -110,7 +109,8 @@ DATABASES = {
      "default": {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dbase',
-        'HOST': '127.0.0.1',
+        # 'HOST': '127.0.0.1',
+        'HOST': 'db',
         'PORT': 3306,
         'USER': 'root',
         'PASSWORD': '123456',
@@ -170,3 +170,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 
 # AUTH_USER_MODEL = 'app.User'
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",  # Redis 服务器地址
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
