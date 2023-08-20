@@ -20,4 +20,6 @@ CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 #docker exec -it webbacked-web-1 python manage.py migrate
 
+#pip freeze > requirements.txt
+#create database dbase default charset utf8 collate utf8_general_ci;
 

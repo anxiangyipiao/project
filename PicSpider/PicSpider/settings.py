@@ -21,7 +21,7 @@ ROBOTSTXT_OBEY = False
 
 
 # MySQL 数据库配置
-MYSQL_HOST = 'localhost'
+MYSQL_HOST = 'db'
 MYSQL_PORT = 3306
 MYSQL_DBNAME = 'dbase'
 MYSQL_USER = 'root'
