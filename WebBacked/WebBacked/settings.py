@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-v_!w^)84bu%&w01vvzssm*q649b8bj%x%ghe=34atmmhb45nj=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["0.0.0.0","localhost","127.0.0.1"]
 
 
 CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
@@ -57,8 +57,6 @@ INSTALLED_APPS = [
     'app',
     'captcha',
     'mdeditor',
-    # 'django-celery-results',
-    # 'django-celery-beat',
 ]
 
 
@@ -114,6 +112,7 @@ DATABASES = {
         'PORT': 3306,
         'USER': 'root',
         'PASSWORD': '123456',
+        "OPTIONS": {"charset": "utf8mb4"}
     },
 }
 
@@ -174,7 +173,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",  # Redis 服务器地址
+        "LOCATION": "redis://redis:6379/1",  # Redis 服务器地址
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }

@@ -92,7 +92,7 @@ class RolePermission(models.Model):
 class ImageTable(models.Model):
     url = models.CharField(max_length=255, blank=True, null=True)
     title = models.CharField(max_length=255, blank=True, null=True)
-    source = models.TextField(blank=True, null=True)
+    source = models.BinaryField(blank=True, null=True)
     is_public = models.IntegerField(blank=True, null=True)
     category = models.CharField(max_length=50, blank=True, null=True)
     crawl_time = models.DateTimeField(blank=True, null=True)

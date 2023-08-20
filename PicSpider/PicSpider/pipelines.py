@@ -23,7 +23,7 @@ class PicspiderPipeline(object):
             password=settings['MYSQL_PASSWD'],
             charset='utf8mb4'
         )
-        self.create_table()
+        # self.create_table()
         self.cursor = self.connection.cursor()
 
 
