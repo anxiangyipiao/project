@@ -33,12 +33,12 @@ services:
       - mynetwork
   
   
-  scrapy:
-    build:
-      context: ../PicSpider
-      dockerfile: Dockerfile  # 如果 Scrapy 项目有自己的 Dockerfile，指定它
-    networks:
-      - mynetwork
+  # scrapy:
+  #   build:
+  #     context: ../PicSpider
+  #     dockerfile: Dockerfile  # 如果 Scrapy 项目有自己的 Dockerfile，指定它
+  #   networks:
+  #     - mynetwork
       
 networks:
   mynetwork:
